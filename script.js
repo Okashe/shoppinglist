@@ -16,11 +16,15 @@ function onClick(e){
     // console.log(e.offsetY);//y position of the mouse click relative to the element
     // console.log(e.pageX);//x position of the mouse click relative to the page
     // console.log(e.pageY);//y position of the mouse click relative to the page
-    console.log(e.screenX);//x position of the mouse click relative to the screen
-    console.log(e.screenY);//y position of the mouse click relative to the screen
+    // console.log(e.screenX);//x position of the mouse click relative to the screen
+    // console.log(e.screenY);//y position of the mouse click relative to the screen
 }
-
-logo.addEventListener('click', onClick);
+function onDrag(e){
+    //h1 displays 
+    document.querySelector('h1').textContent = `X ${e.clientX} Y ${e.clientY}`;
+}
+ logo.addEventListener('click', onClick);
+ logo.addEventListener('drag', onDrag);
 
 // here is the difference though
 // document.body.addEventListener('click', function(e){
