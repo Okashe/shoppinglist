@@ -10,12 +10,21 @@ const onKeyUp = (e) => {
 
 const onKeyDown = (e) => {
    //key
-    console.log(e.key);
-    document.querySelector('h1').innerText = e.key; //replaces h1 with whateveer you type
+    // if(e.key === 'Enter'){
+    //     alert('you pressend enter'); //blocks the event 
+    // }
    //keyCode
+   //https://www.toptal.com/developers/keycode/table-of-all-keycodes
+if(e.keyCode ===13){
+    alert('you pressed enter')
+}
 
    //code
-}
+   //console.log(e.code);
+   if(e.code=== 'Digit1'){//fires off whenever you input 1
+    console.log('You pressed 1');
+   }
+};
 
 // itemInput.addEventListener('keypress', onKeyPress);
 // itemInput.addEventListener('keyup', onKeyUp);
