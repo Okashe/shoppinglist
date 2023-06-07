@@ -12,9 +12,23 @@ function onChecked(e){
     heading.textContent = isChecked ? 'Checked' : 'Not checked';
 }
 
+function onFocus(){
+    console.log('Input is focused');
+    itemInput.style.outlineStyle = 'solid';
+    itemInput.style.outlineWidth = '1px';
+    itemInput.style.outlineColor = 'green';
+}
+function onBlur(){
+    console.log('Input is not focused');
+    itemInput.style.outlineStyle = 'none';
+    
+}
+
 // itemInput.addEventListener('input', onInput);
 //priorityInput.addEventListener('input', onInput);
 
 //change will do the same thing , but not suggested
 priorityInput.addEventListener('change', onInput);
 checkbox.addEventListener('input', onChecked);
+itemInput.addEventListener('focus', onFocus);
+itemInput.addEventListener('blur', onBlur);
