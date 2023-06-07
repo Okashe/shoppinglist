@@ -4,13 +4,17 @@ const onKeyPress = e => {
     //when you tap once
     console.log('keypress')
 };
-// const onKeyUp = (e) => {
-//     console.log('keyup');
-// }
+const onKeyUp = (e) => {
+    console.log('keyup');
+}
 
 const onKeyDown = (e) => {
-    //keeps firing off when you hold down until you release
-    console.log('keydown');
+   //key
+    console.log(e.key);
+    document.querySelector('h1').innerText = e.key; //replaces h1 with whateveer you type
+   //keyCode
+
+   //code
 }
 
 // itemInput.addEventListener('keypress', onKeyPress);
