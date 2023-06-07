@@ -6,7 +6,13 @@ const logo = document.querySelector('img');
 
 //make it do something
 const onDoubleClick = () => {
-    document.body.style.backgroundColor ='purple';
+   if(document.body.style.backgroundColor !== 'purple') {
+      document.body.style.backgroundColor='purple';
+      document.body.style.color = 'white';
+   }else{
+    document.body.style.backgroundColor='white';
+    document.body.style.color = 'black';
+   }
    
 };
 //const onClick = () => console.log('click event');
