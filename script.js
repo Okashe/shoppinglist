@@ -15,10 +15,13 @@ const onDoubleClick = () => {
    }
    
 };
-//const onClick = () => console.log('click event');
-//logo.addEventListener('click', onClick);
+const onClick = () => console.log('click event');
 
+const onRightClick = () => console.log('right click event');
+
+logo.addEventListener('click', onClick);
 logo.addEventListener("dblclick", onDoubleClick);
+logo.addEventListener('contextmenu', onRightClick);
 
 //logo.dispatchEvent(new Event("click"));
 // function onClear(){
