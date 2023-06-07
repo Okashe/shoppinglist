@@ -1,34 +1,8 @@
-const itemInput = document.getElementById('item-input');
-const priorityInput = document.getElementById('priority-input');
-const checkbox = document.getElementById('checkbox');
-const heading = document.querySelector('h1');
+const form = document.getElementById('item-form');
 
-function onInput(e){
-    heading.textContent = e.target.value;
-}
-function onChecked(e){
-    //console.log(e.target.checked);
-    const isChecked = e.target.checked;
-    heading.textContent = isChecked ? 'Checked' : 'Not checked';
+function onSubmit(e){
+    //flashes submit quickly
+    console.log('submit');
 }
 
-function onFocus(){
-    console.log('Input is focused');
-    itemInput.style.outlineStyle = 'solid';
-    itemInput.style.outlineWidth = '1px';
-    itemInput.style.outlineColor = 'green';
-}
-function onBlur(){
-    console.log('Input is not focused');
-    itemInput.style.outlineStyle = 'none';
-    
-}
-
-// itemInput.addEventListener('input', onInput);
-//priorityInput.addEventListener('input', onInput);
-
-//change will do the same thing , but not suggested
-priorityInput.addEventListener('change', onInput);
-checkbox.addEventListener('input', onChecked);
-itemInput.addEventListener('focus', onFocus);
-itemInput.addEventListener('blur', onBlur);
+form.addEventListener('submit', onSubmit);
