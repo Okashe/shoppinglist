@@ -1,36 +1,18 @@
-const logo = document.querySelector('img');
+const itemInput = document.getElementById('item-input');
 
-function onClick(e){
-    //you will see image twice, as it is the same thing.
-    // console.log(e.target);
-    // console.log(e.currentTarget);
-    // e.target.style.backgroundColor = 'black';
-    // console.log(e.type);
-    //time event was triggered
-    // console.log(e.timeStamp);//changes whenever you click
-    // console.log(e.clientX);  //x position of the mouse click relative to the window
-    // console.log(e.clientY);//y position of the mouse click relative to the window
-    
-    //coordinates of where you click
-    // console.log(e.offsetX); //x position of the mouse click relative to the element
-    // console.log(e.offsetY);//y position of the mouse click relative to the element
-    // console.log(e.pageX);//x position of the mouse click relative to the page
-    // console.log(e.pageY);//y position of the mouse click relative to the page
-    // console.log(e.screenX);//x position of the mouse click relative to the screen
-    // console.log(e.screenY);//y position of the mouse click relative to the screen
-}
-function onDrag(e){
-    //h1 displays 
-    document.querySelector('h1').textContent = `X ${e.clientX} Y ${e.clientY}`;
-}
- logo.addEventListener('click', onClick);
- logo.addEventListener('drag', onDrag);
+const onKeyPress = e => {
+    //when you tap once
+    console.log('keypress')
+};
+// const onKeyUp = (e) => {
+//     console.log('keyup');
+// }
 
-// here is the difference though
-// document.body.addEventListener('click', function(e){
-//     //they will return different things: 
-//     //currentTarget return whaterver event is attached to i.e body
-//     //The target is whatever you clicked
-//     console.log(e.target);
-//     console.log(e.currentTarget);
-// });
+const onKeyDown = (e) => {
+    //keeps firing off when you hold down until you release
+    console.log('keydown');
+}
+
+// itemInput.addEventListener('keypress', onKeyPress);
+// itemInput.addEventListener('keyup', onKeyUp);
+itemInput.addEventListener('keydown', onKeyDown);
