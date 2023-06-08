@@ -3,7 +3,8 @@ const itemInput= document.getElementById('item-input');
 const itemList = document.getElementById('item-list');
 const clearButton = document.getElementById('clear');
 const itemFilter = document.getElementById('filter');
-
+const formBtn = itemForm.querySelector('button');
+let isEditMode = false;
 
 //displays items that are currently on local storage
 function displayItems(){
@@ -22,6 +23,15 @@ function onAddItemSubmit(e){
     if(newItem === ''){
         alert('Please add an item');
         return;
+    }
+
+    //check for edit mode
+    if(isEditMode){
+        const itemToEdit = itemList.querySelector('.edit-mode');
+        removeItemFromStorage(itemToEdit.textContent);
+        itemToEdit.classList.remove('edit-mode');
+        itemToEdit.remove();
+        isEditMode = false;
     }
 
     //create item DOM element
@@ -59,6 +69,8 @@ function createButton(classes){
     button.appendChild(icon);
     return button;
 }
+
+
 function createIcon(classes){
     const icon = document.createElement('i');
     icon.className = classes;
@@ -88,11 +100,30 @@ function getItemsFromStorage(){
     return itemsFromStorage;
 }
 
+
+
 function onClickItem(e){
     if(e.target.parentElement.classList.contains('remove-item')){
         removeItem(e.target.parentElement.parentElement);
+  }else{
+    //console.log(1);
+    setItemToEdit(e.target);
   }
 }
+
+
+function setItemToEdit(item){
+    isEditMode = true;
+
+    itemList.querySelectorAll('li').forEach((i)=> i.classList.remove('edit-mode'))
+
+    item.classList.add('edit-mode');
+    formBtn.innerHTML = '<i class="fa-solid fa-pen"></i>Update Item';
+    formBtn.style.backgroundColor='#228B22';
+    itemInput.value= item.textContent;
+}
+
+
 function removeItem(item){
    if(confirm('Are you sure to delete?')){
 
@@ -105,6 +136,8 @@ function removeItem(item){
     checkUI();
    }
 }
+
+
 
 function  removeItemFromStorage(item){
 let  itemsFromStorage = getItemsFromStorage();
@@ -148,6 +181,7 @@ function filterItems(e){
 //checking state 
 //you wil need to run this in a few places
 function checkUI(){
+    itemInput.value = '';
     //if we conosle log the items we realize nodelist is 0
     //console.log(items)//  bcoz items are defined up globally
     //so we need to define items here
@@ -160,8 +194,15 @@ function checkUI(){
         clearButton.style.display ='block';
         itemFilter.style.display ='block';
     }
+
+    formBtn.innerHTML =  '<i class="fa-solid fa-plus"></i> Add Item';
+    formBtn.style.backgroundColor = '#333';
+
+    isEditMode = false;
 }
 
+
+//initialize app
 function init(){
 //event listeners
 itemForm.addEventListener('submit', onAddItemSubmit);
