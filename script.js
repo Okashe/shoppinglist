@@ -42,13 +42,12 @@ function createIcon(classes){
 }
 
 function removeItem(e){
-    //console.log(e.target);
-    //We can't do e.target.remove()  bcoz this will remove the button
-    //we have to navigate the list item and delete that.
-    //There is aprperty cllaed parentElement / parentNode
-    //check the parenElement 
-    console.log(e.target.parentElement.classList);
-    e.target.remove();
+  
+    if(e.target.parentElement.classList.contains('remove-item')){
+        //console.log('click');
+        e.target.parentElement.parentElement.remove();  
+    };
+   
 }
 //event listeners
 itemForm.addEventListener('submit', addItem);
