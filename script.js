@@ -2,6 +2,9 @@ const itemForm = document.getElementById('item-form');
 const itemInput= document.getElementById('item-input');
 const itemList = document.getElementById('item-list');
 const clearButton = document.getElementById('clear');
+const itemFilter = document.getElementById('filter');
+const items = document.querySelectorAll('li');
+
 
 function addItem(e){
     e.preventDefault();
@@ -49,12 +52,30 @@ function removeItem(e){
    
 }
 function clearItems(){
-    //console.log('works');
     while(itemList.firstChild){
         itemList.removeChild(itemList.firstChild);
+    }
+}
+
+//checking state 
+//you wil need to run this in a few places
+function checkUI(){
+    //if we conosle log the items we realize nodelist is 0
+    //console.log(items)//  bcoz items are defined up globally
+    if(items.length===0){
+      clearButton.style.display ='none';
+      itemFilter.style.display ='none';
+    }else{
+        clearButton.style.display ='block';
+        itemFilter.style.display ='block';
     }
 }
 //event listeners
 itemForm.addEventListener('submit', addItem);
 itemList.addEventListener('click', removeItem);
 clearButton.addEventListener('click', clearItems);
+
+//only running on global scope now
+//runs only when the page loads
+//does not run every time you add an item
+checkUI();
