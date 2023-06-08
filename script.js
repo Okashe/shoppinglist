@@ -76,9 +76,9 @@ function filterItems(e){
         const itemName = item.firstChild.textContent.toLowerCase();  //firs child is the text - item name
         //console.log(itemName);
         if(itemName.indexOf(text) != -1){ //means it matches
-            console.log(true);
+           item.style.display = 'flex';
         }else{
-            console.log(false);
+            item.style.display = 'none';
         }
     });
     
