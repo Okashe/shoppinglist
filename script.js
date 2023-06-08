@@ -3,7 +3,7 @@ const itemInput= document.getElementById('item-input');
 const itemList = document.getElementById('item-list');
 const clearButton = document.getElementById('clear');
 const itemFilter = document.getElementById('filter');
-const items = document.querySelectorAll('li');
+
 
 
 function addItem(e){
@@ -29,6 +29,9 @@ function addItem(e){
 
   //add it to the DOM
   itemList.appendChild(li);
+
+  checkUI();
+
   itemInput.value='';//clear value
 }
 function createButton(classes){
@@ -47,7 +50,12 @@ function createIcon(classes){
 function removeItem(e){
   
     if(e.target.parentElement.classList.contains('remove-item')){
-        e.target.parentElement.parentElement.remove();  
+        if(confirm('Are you sure to delete?')){
+            e.target.parentElement.parentElement.remove(); 
+            //we have to check ui again. 
+            checkUI();
+        }
+        
     };
    
 }
@@ -55,6 +63,7 @@ function clearItems(){
     while(itemList.firstChild){
         itemList.removeChild(itemList.firstChild);
     }
+    checkUI();
 }
 
 //checking state 
@@ -62,6 +71,9 @@ function clearItems(){
 function checkUI(){
     //if we conosle log the items we realize nodelist is 0
     //console.log(items)//  bcoz items are defined up globally
+    //so we need to define items here
+    //We need to account for everything we do when writing vanialla js
+    const items = document.querySelectorAll('li');
     if(items.length===0){
       clearButton.style.display ='none';
       itemFilter.style.display ='none';
