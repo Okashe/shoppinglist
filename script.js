@@ -88,8 +88,8 @@ function addItemToStorage(item){
 
     //add new item to array
     itemsFromStorage.push(item);
-    //convert to JSON string and set to local storage
 
+    //convert to JSON string and set to local storage
     localStorage.setItem('items', JSON.stringify(itemsFromStorage))
 }
 
@@ -119,15 +119,8 @@ function onClickItem(e){
 
 function checkIfItemExists(item){
     const itemsFromStorage = getItemsFromStorage();
-    //shoter way
     return itemsFromStorage.includes(item);
     
-    //long way
-    // if(itemsFromStorage.includes(item)){
-    //    return true;
-    // }else{
-    //     return false;
-    // }
 }
 
 
@@ -188,7 +181,6 @@ function filterItems(e){
 
     items.forEach((item)=>{
         const itemName = item.firstChild.textContent.toLowerCase();  //firs child is the text - item name
-        //console.log(itemName);
         if(itemName.indexOf(text) != -1){ //means it matches
            item.style.display = 'flex';
         }else{
@@ -198,14 +190,9 @@ function filterItems(e){
     
 }
 
-//checking state 
-//you wil need to run this in a few places
+//update UI state
 function checkUI(){
     itemInput.value = '';
-    //if we conosle log the items we realize nodelist is 0
-    //console.log(items)//  bcoz items are defined up globally
-    //so we need to define items here
-    //We need to account for everything we do when writing vanialla js
     const items = document.querySelectorAll('li');
     if(items.length===0){
       clearButton.style.display ='none';
