@@ -65,6 +65,24 @@ function clearItems(){
     }
     checkUI();
 }
+function filterItems(e){
+    //since we don't have items defined globally we define it here as well
+    const items = document.querySelectorAll('li');
+    const text = e.target.value.toLowerCase();
+    
+
+
+    items.forEach((item)=>{
+        const itemName = item.firstChild.textContent.toLowerCase();  //firs child is the text - item name
+        //console.log(itemName);
+        if(itemName.indexOf(text) != -1){ //means it matches
+            console.log(true);
+        }else{
+            console.log(false);
+        }
+    });
+    
+}
 
 //checking state 
 //you wil need to run this in a few places
@@ -86,6 +104,7 @@ function checkUI(){
 itemForm.addEventListener('submit', addItem);
 itemList.addEventListener('click', removeItem);
 clearButton.addEventListener('click', clearItems);
+itemFilter.addEventListener('input', filterItems);
 
 //only running on global scope now
 //runs only when the page loads
