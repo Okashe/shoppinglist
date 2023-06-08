@@ -5,6 +5,13 @@ const clearButton = document.getElementById('clear');
 const itemFilter = document.getElementById('filter');
 
 
+//displays items that are currently on local storage
+function displayItems(){
+    const itemsFromStorage = getItemsFromStorage();
+    itemsFromStorage.forEach((item)=> addItemToDOM(item));
+    checkUI();
+}
+
 
 function onAddItemSubmit(e){
     e.preventDefault();
@@ -134,14 +141,17 @@ function checkUI(){
         itemFilter.style.display ='block';
     }
 }
+
+function init(){
 //event listeners
 itemForm.addEventListener('submit', onAddItemSubmit);
 itemList.addEventListener('click', removeItem);
 clearButton.addEventListener('click', clearItems);
 itemFilter.addEventListener('input', filterItems);
+document.addEventListener('DOMContentLoaded', displayItems);
 
-//only running on global scope now
-//runs only when the page loads
-//does not run every time you add an item
 checkUI();
+}
+
+init();
 
