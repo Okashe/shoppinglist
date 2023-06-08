@@ -6,19 +6,32 @@ const itemFilter = document.getElementById('filter');
 
 
 
-function addItem(e){
+function onAddItemSubmit(e){
     e.preventDefault();
 
     const newItem = itemInput.value;
+
     //Validate Input
-    if(itemInput.value === ''){
+    if(newItem === ''){
         alert('Please add an item');
         return;
     }
 
-   //Create list item
+    //create item DOM element
+   addItemToDOM(newItem);
+
+   //add item to local storage
+   addItemToStorage(newItem);
+  
+   checkUI();
+  
+   itemInput.value='';//clear value
+}
+
+function addItemToDOM(item){
+       //Create list item
   const li =   document.createElement('li');
-  li.appendChild(document.createTextNode(newItem));
+  li.appendChild(document.createTextNode(item));
 
  
 
@@ -29,11 +42,9 @@ function addItem(e){
 
   //add it to the DOM
   itemList.appendChild(li);
-
-  checkUI();
-
-  itemInput.value='';//clear value
 }
+
+
 function createButton(classes){
     const button = document.createElement('button');
     button.className = classes;
@@ -45,6 +56,29 @@ function createIcon(classes){
     const icon = document.createElement('i');
     icon.className = classes;
     return icon;
+}
+
+//add items to local storage
+function addItemToStorage(item){
+    const itemsFromStorage = getItemsFromStorage();
+
+    //add new item to array
+    itemsFromStorage.push(item);
+    //convert to JSON string and set to local storage
+
+    localStorage.setItem('items', JSON.stringify(itemsFromStorage))
+}
+
+function getItemsFromStorage(){
+    let itemsFromStorage;
+    if(localStorage.getItem('items') === null){
+        itemsFromStorage=[];
+
+    }else{
+        itemsFromStorage =JSON.parse(localStorage.getItem('items'))
+    }
+
+    return itemsFromStorage;
 }
 
 function removeItem(e){
@@ -101,7 +135,7 @@ function checkUI(){
     }
 }
 //event listeners
-itemForm.addEventListener('submit', addItem);
+itemForm.addEventListener('submit', onAddItemSubmit);
 itemList.addEventListener('click', removeItem);
 clearButton.addEventListener('click', clearItems);
 itemFilter.addEventListener('input', filterItems);
@@ -111,8 +145,3 @@ itemFilter.addEventListener('input', filterItems);
 //does not run every time you add an item
 checkUI();
 
-//local storage
-localStorage.setItem('name', 'Ocash');
-console.log(localStorage.getItem('name'));
-//localStorage.removeItem('name');
-localStorage.clear();
