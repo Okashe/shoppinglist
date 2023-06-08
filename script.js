@@ -22,7 +22,11 @@ function addItem(e){
   const button = createButton('remove-item btn-link text-red');
   //console.log(button);
   li.appendChild(button);
-  console.log(li);
+  //console.log(li);
+
+  //add it to the DOM
+  itemList.appendChild(li);
+  itemInput.value='';//clear value
 }
 function createButton(classes){
     const button = document.createElement('button');
