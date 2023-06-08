@@ -88,24 +88,44 @@ function getItemsFromStorage(){
     return itemsFromStorage;
 }
 
-function removeItem(e){
-  
+function onClickItem(e){
     if(e.target.parentElement.classList.contains('remove-item')){
-        if(confirm('Are you sure to delete?')){
-            e.target.parentElement.parentElement.remove(); 
-            //we have to check ui again. 
-            checkUI();
-        }
-        
-    };
-   
+        removeItem(e.target.parentElement.parentElement);
+  }
 }
+function removeItem(item){
+   if(confirm('Are you sure to delete?')){
+
+    //remove item from DOM
+    item.remove();
+
+    //remove item from storage
+    removeItemFromStorage(item.textContent);
+
+    checkUI();
+   }
+}
+
+function  removeItemFromStorage(item){
+let  itemsFromStorage = getItemsFromStorage();
+
+  //filter out item to be removed
+ itemsFromStorage =  itemsFromStorage.filter((i) => i !== item);
+
+ //Re-set to local storage
+ localStorage.setItem('items', JSON.stringify(itemsFromStorage));
+}
+
 function clearItems(){
     while(itemList.firstChild){
-        itemList.removeChild(itemList.firstChild);
+        itemList.removeChild(itemList.firstChild);   
     }
+    //clear from local storage
+    localStorage.removeItem('items');
+    
     checkUI();
 }
+
 function filterItems(e){
     //since we don't have items defined globally we define it here as well
     const items = document.querySelectorAll('li');
@@ -145,7 +165,7 @@ function checkUI(){
 function init(){
 //event listeners
 itemForm.addEventListener('submit', onAddItemSubmit);
-itemList.addEventListener('click', removeItem);
+itemList.addEventListener('click', onClickItem);
 clearButton.addEventListener('click', clearItems);
 itemFilter.addEventListener('input', filterItems);
 document.addEventListener('DOMContentLoaded', displayItems);
