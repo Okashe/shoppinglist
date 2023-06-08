@@ -1,19 +1,18 @@
-const listItems = document.querySelectorAll('li');
-const list = document.querySelector('ul');
+const itemForm = document.getElementById('item-form');
+const itemInput= document.getElementById('item-input');
+const itemList = document.getElementById('item-list');
 
-// deleting
-list.addEventListener('click', (e)=>{
-    //target gives you what click on
-    //console.log(e.target);
-    if(e.target.tagName === 'LI'){
-        e.target.remove();
+
+function addItem(e){
+    e.preventDefault();
+
+    //Validate Input
+    if(itemInput.value === ''){
+        alert('Please add an item');
+        return;
     }
-})
-//change to red when hovered over
-list.addEventListener('mouseover', (e)=>{
-    if(e.target.tagName==='LI'){
-        e.target.style.color = 'red';
-    }
-});
 
-
+    console.log('success');
+}
+//event listeners
+itemForm.addEventListener('submit', addItem);
