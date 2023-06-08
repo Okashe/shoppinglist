@@ -110,3 +110,9 @@ itemFilter.addEventListener('input', filterItems);
 //runs only when the page loads
 //does not run every time you add an item
 checkUI();
+
+//local storage
+localStorage.setItem('name', 'Ocash');
+console.log(localStorage.getItem('name'));
+//localStorage.removeItem('name');
+localStorage.clear();
